@@ -264,3 +264,53 @@ void Mesh::loadMaterialFile(const std::string& filename, std::map<std::string, M
                                       " with " + std::to_string(materials.size()) + " materials",
                                   Logger::LogType::HIGHLIGHT);
 }
+
+//new
+void Mesh::loadRawPoints(std::string fileName) {
+    std::string fullPath = PATH + "PointsFromLaz/" + fileName;
+    std::ifstream file(fullPath);
+
+    if (!file.is_open()) {
+        Logger::getInstance().logText("Could not find the Laz Pints " + fileName, Logger::LogType::ERR);
+        return;
+    }
+
+    std::string line;
+    // this will skip the first two lines
+    std::getline(file, line);
+    std::getline(file, line);
+
+    bool firstPoint = true;
+    glm::dvec3 offset(0.0);
+
+    float scale = 0.001f; // resuse the size if the index's
+
+    while (std::getline(file, line)) {
+        if (line.empty()) continue;
+
+        std::stringstream ss(line);
+        double rawX, rawY, rawZ;
+        ss >> rawX >> rawY >> rawZ;
+
+        // Set it in the center
+        if (firstPoint) {
+            offset = glm::dvec3(rawX, rawY, rawZ);
+            firstPoint = false;
+        }
+
+        Vertex v;
+        v.position.x = static_cast<float>((rawX - offset.x) * scale);
+        v.position.y = static_cast<float>((rawY - offset.y) * scale);
+        v.position.z = static_cast<float>((rawZ - offset.z) * scale);
+
+        // Gives it a diffrent color
+        v.color = glm::vec3(1.0f, 1.0f, 1.0f);
+        v.textureCoordinate = glm::vec2(0.0f);
+
+        mVertices.push_back(v);
+
+        mIndices.push_back(static_cast<uint16_t>(mIndices.size()));
+    }
+    file.close();
+    Logger::getInstance().logText("Loaded " + std::to_string(mVertices.size()) + " points.", Logger::LogType::HIGHLIGHT);
+}

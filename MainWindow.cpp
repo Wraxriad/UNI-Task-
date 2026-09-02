@@ -89,40 +89,11 @@ void MainWindow::start()
 
 void MainWindow::spawnTestObjects()
 {
-    if (!mVulkanWindow) {
-        LOGE("Cannot spawn objects: Renderer is null!");
-        return;
+    GameObject* pointsObj = mVulkanWindow->spawnPointsObject("Castle_2_Points.txt");
+    if (pointsObj) {
+        pointsObj->setPosition(glm::vec3(0, 0, 0));
+        pointsObj->setScale(glm::vec3(1, 1, 1));
     }
-
-    LOGH("=== Spawning Test Objects ===");
-
-    // Create and set a light
-    Light* light = new Light();
-    light->setPosition(glm::vec3(2.0f, 5.0f, 2.0f));
-    light->setColor(glm::vec3(1.0f, 1.0f, 1.0f));
-    light->ambientStrength = 0.2f;
-    light->diffuseStrength = 1.0f;
-    light->specularStrength = 0.5f;
-    light->specularExponent = 32.0f;
-    mVulkanWindow->setLight(light);
-
-    // Spawn fish with textures from MTL
-    LOGH("Attempting to spawn fish with textures...");
-    GameObject* fish = mVulkanWindow->spawnObject(
-        "fish.obj",                    // Mesh file (references MTL internally)
-        "",                            // Empty string - textures come from MTL
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(1.0f, 1.0f, 1.0f),
-        glm::vec3(0.0f, 0.0f, 0.0f)
-        );
-
-    if (fish) {
-        LOGH("✓ Successfully spawned fish with textures!");
-    } else {
-        LOGE("✗ Failed to spawn fish!");
-    }
-
-    LOGH("=== Finished Spawning Objects ===");
 }
 
 void MainWindow::keyPressEvent(QKeyEvent* event)

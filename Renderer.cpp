@@ -551,7 +551,7 @@ void Renderer::createGraphicsPipeline()
 
     VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
     inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST; // VK_PRIMITIVE_TOPOLOGY_LINE_STRIP or VK_PRIMITIVE_TOPOLOGY_POINT_LIST.
     inputAssembly.primitiveRestartEnable = VK_FALSE;
 
     VkPipelineViewportStateCreateInfo viewportState{};
@@ -1831,4 +1831,22 @@ void Renderer::endSingleTimeCommands(VkCommandBuffer commandBuffer)
     vkQueueWaitIdle(graphicsQueue);
 
     vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
+}
+
+GameObject* Renderer::spawnPointsObject(std::string filename) {
+    Mesh* mesh = new Mesh("");
+    mesh -> loadRawPoints(filename);
+
+    if (mesh->getVertices().empty()) return nullptr;
+
+    createMeshBuffers(mesh);
+    mAllMeshes.push_back(mesh);
+
+    Material* material = new Material();
+    material -> pipeline = graphicsPipeline;
+    material -> color = glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
+
+    GameObject* obj = new GameObject(mesh, material);
+    mGameObjects.push_back(obj);
+    return obj;
 }

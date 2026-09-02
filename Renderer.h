@@ -56,6 +56,9 @@ public:
         glm::vec3 rotation = {0.0f, 0.0f, 0.0f}
         );
 
+    //new
+    class GameObject * spawnPointsObject(std::string filename);
+
 protected:
     //Qt event handlers - called when requestUpdate(); is called
     void exposeEvent(QExposeEvent* event) override;

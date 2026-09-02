@@ -1,0 +1,48 @@
+LASHeaderData:
+--------------
+File Signature: LASF
+File Source ID: 0
+Global Encoding: 1
+Project ID - GUID Data 2: 0
+Project ID - GUID Data 3: 0
+File Creation Day Of Year: 353
+File Creation Year: 2019
+Header Size: 227
+Point Data Record Length: 28
+Project ID - GUID Data 4: 00, 00, 00, 00, 00, 00, 00, 00
+Version Major: 1
+Version Minor: 2
+System Identifier: LAStools (c) by rapidlasso GmbH
+Generating Software: lasmerge (version 180303)
+Offset To Point Data: 1224
+Number Of Variable Length Records: 5
+Point Data Record Format: 1
+Legacy Number Of Point Records: 225435
+X Scale Factor: 0.01
+Y Scale Factor: 0.01
+Z Scale Factor: 0.01
+X Offset: 0
+Y Offset: 0
+Z Offset: 0
+Max X: 597314.61
+Min X: 596875.09
+Max Y: 6642599.99
+Min Y: 6642088.24
+Max Z: 53.52
+Min Z: -3.04
+Start Of Waveform Data Packet Record: 0
+Start Of First Extended Variable Length Record: 0
+Number Of Extended Variable Length Records: 0
+Number Of Point Records: 0
+Number Of Points By Return: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+Legacy Number Of Points By Return: 196152, 21755, 6455, 1063, 10
+Variable Length Records:
+  - com.github.mreutegg.laszip4j.LASVariableLengthRecord@264c689
+  - com.github.mreutegg.laszip4j.LASVariableLengthRecord@18afad5
+  - com.github.mreutegg.laszip4j.LASVariableLengthRecord@1e2d181
+  - com.github.mreutegg.laszip4j.LASVariableLengthRecord@f95d8e
+  - com.github.mreutegg.laszip4j.LASVariableLengthRecord@c44a06
+Extended Variable Length Records:
+  - None
+Extra Bytes Descriptions:
+  - None

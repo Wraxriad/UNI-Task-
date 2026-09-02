@@ -83,6 +83,9 @@ public:
     Mesh(std::string fileName);
     void makeObj();
 
+    //new
+    void loadRawPoints(std::string fileName);
+
     std::string getFileName() const { return mFileName; }
 
 private:

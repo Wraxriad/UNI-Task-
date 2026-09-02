@@ -1,6 +1,6 @@
 #version 450
 
-layout(location = 0) in vec3 fragColor;
+layout(location = 0) in vec3 fragNormal;
 layout(location = 1) in vec3 fragPos;
 layout(location = 2) in vec2 fragTexCoord;
 
@@ -28,11 +28,11 @@ void main()
 {
     if (push.specularParams.z > 5.0)
     {
-        outColor = vec4(fragColor * push.objectColor.rgb, 1.0);
+        outColor = vec4(push.objectColor.rgb, 1.0);
         return;
     }
 
-    vec3 norm = normalize(fragColor);
+    vec3 norm = normalize(fragNormal);
     vec3 lightDir = normalize(ubo.lightPosition.xyz - fragPos);
     vec3 viewDir = normalize(ubo.cameraPosition.xyz - fragPos);
     vec3 halfwayDir = normalize(lightDir + viewDir);
