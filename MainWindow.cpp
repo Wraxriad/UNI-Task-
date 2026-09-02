@@ -91,8 +91,10 @@ void MainWindow::spawnTestObjects()
 {
     GameObject* pointsObj = mVulkanWindow->spawnPointsObject("Castle_2_Points.txt");
     if (pointsObj) {
-        pointsObj->setPosition(glm::vec3(0, 0, 0));
+        pointsObj->setPosition(glm::vec3(13, -10, 0));
         pointsObj->setScale(glm::vec3(1, 1, 1));
+
+        pointsObj->setRotation(glm::vec3(-90.0f, 90.0f, 0.0f));
     }
 }
 
