@@ -1832,7 +1832,7 @@ void Renderer::endSingleTimeCommands(VkCommandBuffer commandBuffer)
 
     vkFreeCommandBuffers(device, commandPool, 1, &commandBuffer);
 }
-
+ //new
 GameObject* Renderer::spawnPointsObject(std::string filename) {
     Mesh* mesh = new Mesh("");
     mesh -> loadRawPoints(filename);
