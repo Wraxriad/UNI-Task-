@@ -1,0 +1,212 @@
+Logger: deleted log file
+
+--------------------------------------------------------------
+2026-09-02 09:55:28
+Logger started
+
+Vulkan instance extension count: 20
+Available Vulkan extensions:
+VK_KHR_device_group_creation
+VK_KHR_display
+VK_KHR_external_fence_capabilities
+VK_KHR_external_memory_capabilities
+VK_KHR_external_semaphore_capabilities
+VK_KHR_get_display_properties2
+VK_KHR_get_physical_device_properties2
+VK_KHR_get_surface_capabilities2
+VK_KHR_surface
+VK_KHR_surface_maintenance1
+VK_KHR_surface_protected_capabilities
+VK_KHR_win32_surface
+VK_EXT_debug_report
+VK_EXT_debug_utils
+VK_EXT_direct_mode_display
+VK_EXT_surface_maintenance1
+VK_EXT_swapchain_colorspace
+VK_NV_external_memory_capabilities
+VK_KHR_portability_enumeration
+VK_LUNARG_direct_driver_loading
+createInstance successful
+setupDebugMessenger successful
+resizeEvent called
+
+Successfully created a surface!
+Finding physical devices:
+Physical Device No.0, Name: NVIDIA GeForce RTX 4080 Laptop GPU
+   - Max Vulkan API support: 1.4.329
+   - NVIDIA GeForce RTX 4080 Laptop GPU is a suitable device!
+Selected physical device:
+   - NVIDIA GeForce RTX 4080 Laptop GPU
+Found suitable GPU
+Created logical device
+Created swap chain
+ - swapChainImageCount 3:
+Created image views!
+Created image views!
+Created image views!
+create render pass!
+Created UBO descriptor set layout
+Created sampler descriptor set layout
+Vertex shader:
+create shader module
+Fragment shader:
+create shader module
+create pipeline layout!
+create graphics pipeline!
+create framebuffer!
+create framebuffer!
+create framebuffer!
+create command pool!
+Created uniform buffers
+Created texture sampler
+Created descriptor pool
+Created and updated UBO descriptor sets
+allocate command buffers!
+create synchronization objects for frame 0
+create synchronization objects for frame 1
+create synchronization objects for frame 2
+=== Spawning Test Objects ===
+Attempting to spawn fish with textures...
+Attempting to spawn object with mesh: fish.obj
+ERROR: could not find OBJ: fish.obj
+ERROR: could not find OBJ: fish.obj
+Mesh has no vertices!
+✗ Failed to spawn fish!
+=== Finished Spawning Objects ===
+Start is called
+resizeEvent called
+exposeEvent called
+Created swap chain
+ - swapChainImageCount 3:
+Created image views!
+Created image views!
+Created image views!
+create framebuffer!
+create framebuffer!
+create framebuffer!
+Camera Rot: [Yaw: 0.2, Pitch: -0.3]
+Camera Rot: [Yaw: 0.6, Pitch: -0.8]
+Camera Rot: [Yaw: 1.2, Pitch: -1.5]
+Camera Rot: [Yaw: 1.7, Pitch: -2.1]
+Camera Rot: [Yaw: 2.3, Pitch: -3.0]
+Camera Rot: [Yaw: 2.8, Pitch: -4.2]
+Camera Rot: [Yaw: 3.3, Pitch: -5.4]
+Camera Rot: [Yaw: 3.8, Pitch: -6.9]
+Camera Rot: [Yaw: 4.2, Pitch: -8.7]
+Camera Rot: [Yaw: 4.6, Pitch: -10.4]
+Camera Rot: [Yaw: 4.9, Pitch: -12.2]
+Camera Rot: [Yaw: 5.1, Pitch: -13.8]
+Camera Rot: [Yaw: 5.3, Pitch: -15.0]
+Camera Rot: [Yaw: 5.3, Pitch: -16.2]
+Camera Rot: [Yaw: 5.3, Pitch: -17.1]
+Camera Rot: [Yaw: 5.3, Pitch: -18.3]
+Camera Rot: [Yaw: 4.9, Pitch: -18.9]
+Camera Rot: [Yaw: 4.9, Pitch: -19.2]
+Camera Rot: [Yaw: 4.9, Pitch: -19.5]
+Camera Rot: [Yaw: 4.8, Pitch: -19.8]
+Input state - W:0 S:0 A:0 D:0 RMB:1
+RMB is pressed - movement enabled
+Camera Rot: [Yaw: 4.6, Pitch: -20.1]
+Camera Rot: [Yaw: 4.6, Pitch: -20.1]
+Camera Rot: [Yaw: 4.3, Pitch: -20.4]
+Camera Rot: [Yaw: 4.3, Pitch: -20.4]
+Camera Rot: [Yaw: 4.0, Pitch: -20.5]
+Camera Rot: [Yaw: 3.6, Pitch: -20.5]
+Camera Rot: [Yaw: 2.8, Pitch: -20.4]
+Camera Rot: [Yaw: 1.9, Pitch: -20.4]
+Camera Rot: [Yaw: 1.0, Pitch: -20.4]
+Camera Rot: [Yaw: 0.7, Pitch: -20.4]
+Camera Rot: [Yaw: 0.1, Pitch: -20.4]
+Camera Rot: [Yaw: -0.0, Pitch: -20.4]
+Camera Rot: [Yaw: -0.2, Pitch: -20.5]
+Camera Rot: [Yaw: -0.2, Pitch: -20.7]
+Camera Rot: [Yaw: -0.2, Pitch: -20.7]
+Camera Rot: [Yaw: -0.3, Pitch: -20.8]
+Camera Rot: [Yaw: -0.3, Pitch: -21.0]
+Camera Rot: [Yaw: -0.3, Pitch: -21.0]
+Camera Rot: [Yaw: -0.3, Pitch: -21.1]
+Camera Rot: [Yaw: -0.5, Pitch: -21.1]
+Camera Rot: [Yaw: -0.5, Pitch: -21.1]
+Camera Rot: [Yaw: -0.6, Pitch: -21.0]
+Camera Rot: [Yaw: -0.8, Pitch: -20.8]
+Camera Rot: [Yaw: -1.1, Pitch: -20.5]
+Camera Rot: [Yaw: -1.5, Pitch: -20.1]
+Camera Rot: [Yaw: -2.3, Pitch: -19.6]
+Camera Rot: [Yaw: -3.2, Pitch: -18.9]
+Camera Rot: [Yaw: -4.2, Pitch: -18.0]
+Camera Rot: [Yaw: -5.7, Pitch: -17.2]
+Camera Rot: [Yaw: -7.4, Pitch: -16.2]
+Camera Rot: [Yaw: -9.2, Pitch: -15.0]
+Camera Rot: [Yaw: -10.5, Pitch: -14.1]
+Camera Rot: [Yaw: -12.0, Pitch: -13.0]
+Camera Rot: [Yaw: -13.5, Pitch: -12.0]
+Camera Rot: [Yaw: -14.9, Pitch: -11.1]
+Camera Rot: [Yaw: -16.4, Pitch: -10.2]
+Camera Rot: [Yaw: -17.6, Pitch: -9.0]
+Camera Rot: [Yaw: -18.9, Pitch: -7.9]
+Camera Rot: [Yaw: -20.0, Pitch: -7.2]
+Camera Rot: [Yaw: -21.3, Pitch: -6.3]
+Camera Rot: [Yaw: -22.2, Pitch: -5.7]
+Camera Rot: [Yaw: -23.3, Pitch: -5.1]
+Camera Rot: [Yaw: -24.2, Pitch: -4.5]
+Camera Rot: [Yaw: -24.9, Pitch: -4.2]
+Camera Rot: [Yaw: -25.7, Pitch: -3.7]
+Camera Rot: [Yaw: -26.1, Pitch: -3.4]
+Camera Rot: [Yaw: -26.6, Pitch: -3.3]
+Camera Rot: [Yaw: -26.9, Pitch: -3.0]
+Camera Rot: [Yaw: -27.3, Pitch: -3.0]
+Camera Rot: [Yaw: -27.6, Pitch: -2.7]
+Camera Rot: [Yaw: -27.8, Pitch: -2.5]
+Camera Rot: [Yaw: -28.1, Pitch: -2.4]
+Camera Rot: [Yaw: -28.1, Pitch: -2.4]
+Camera Rot: [Yaw: -28.4, Pitch: -2.2]
+Camera Rot: [Yaw: -28.4, Pitch: -2.1]
+Camera Rot: [Yaw: -28.5, Pitch: -1.8]
+Input state - W:0 S:0 A:0 D:0 RMB:1
+RMB is pressed - movement enabled
+Camera Rot: [Yaw: -28.6, Pitch: -1.6]
+Camera Rot: [Yaw: -28.8, Pitch: -1.5]
+Camera Rot: [Yaw: -28.9, Pitch: -1.2]
+Camera Rot: [Yaw: -28.9, Pitch: -0.9]
+Camera Rot: [Yaw: -28.9, Pitch: -0.4]
+Camera Rot: [Yaw: -29.1, Pitch: 0.0]
+Camera Rot: [Yaw: -29.1, Pitch: 0.5]
+Camera Rot: [Yaw: -29.1, Pitch: 1.4]
+Camera Rot: [Yaw: -29.1, Pitch: 2.6]
+Camera Rot: [Yaw: -29.1, Pitch: 4.4]
+Camera Rot: [Yaw: -29.1, Pitch: 6.0]
+Camera Rot: [Yaw: -28.9, Pitch: 7.8]
+Camera Rot: [Yaw: -28.6, Pitch: 9.0]
+Camera Rot: [Yaw: -28.4, Pitch: 9.9]
+Camera Rot: [Yaw: -27.9, Pitch: 10.5]
+Camera Rot: [Yaw: -27.4, Pitch: 11.3]
+Camera Rot: [Yaw: -27.1, Pitch: 11.7]
+Camera Rot: [Yaw: -26.7, Pitch: 12.2]
+Camera Rot: [Yaw: -26.4, Pitch: 12.3]
+Camera Rot: [Yaw: -26.3, Pitch: 12.6]
+Camera Rot: [Yaw: -25.8, Pitch: 12.9]
+Camera Rot: [Yaw: -25.6, Pitch: 13.2]
+Camera Rot: [Yaw: -25.4, Pitch: 13.4]
+Camera Rot: [Yaw: -25.2, Pitch: 13.5]
+Camera Rot: [Yaw: -25.1, Pitch: 13.7]
+Camera Rot: [Yaw: -25.1, Pitch: 13.8]
+Camera Rot: [Yaw: -24.8, Pitch: 13.8]
+Camera Rot: [Yaw: -24.8, Pitch: 14.0]
+Camera Rot: [Yaw: -24.8, Pitch: 14.0]
+Camera Rot: [Yaw: -24.8, Pitch: 14.1]
+Camera Rot: [Yaw: -24.6, Pitch: 14.1]
+Camera Rot: [Yaw: -24.6, Pitch: 14.3]
+Camera Rot: [Yaw: -24.5, Pitch: 14.3]
+Camera Rot: [Yaw: -24.5, Pitch: 14.4]
+Camera Rot: [Yaw: -24.5, Pitch: 14.4]
+Camera Rot: [Yaw: -24.5, Pitch: 14.4]
+Camera Rot: [Yaw: -24.5, Pitch: 14.5]
+Camera Rot: [Yaw: -24.3, Pitch: 14.5]
+Camera Rot: [Yaw: -24.3, Pitch: 14.7]
+Camera Rot: [Yaw: -24.5, Pitch: 14.7]
+Camera Rot: [Yaw: -24.5, Pitch: 14.8]
+Camera Rot: [Yaw: -24.6, Pitch: 15.0]
+resizeEvent called
+exposeEvent called
+exposeEvent called
+VulkanRenderer Destructor
