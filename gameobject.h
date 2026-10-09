@@ -33,6 +33,7 @@ struct Material
     float shininess {64.0f};
 
     uint32_t textureIndex{0};
+    bool hasTexture{false};
 
     virtual ~Material() = default;
 };

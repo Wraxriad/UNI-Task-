@@ -42,6 +42,7 @@ set(SOURCES
     mesh.cpp mesh.h
     light.cpp light.h
     stb_image.h
+    delaunator.hpp
 )
 
 # all shader and script files shown in IDE

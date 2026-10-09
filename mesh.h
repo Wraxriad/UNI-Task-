@@ -90,7 +90,7 @@ public:
 
 private:
     std::vector<Vertex> mVertices;
-    std::vector<uint16_t> mIndices;
+    std::vector<uint32_t> mIndices;
     std::string mFileName;
 
     std::map<std::string, MaterialInfo> mMaterials;
@@ -107,7 +107,7 @@ public:
     VkBuffer getIndexBuffer() const { return mIndexBuffer; }
     uint32_t getIndexCount() const { return static_cast<uint32_t>(mIndices.size()); }
     std::vector<Vertex>& getVertices() { return mVertices; }
-    std::vector<uint16_t>& getIndices() { return mIndices; }
+    std::vector<uint32_t>& getIndices() { return mIndices; }
 
     void setVertexBuffer(VkBuffer buf) { mVertexBuffer = buf; }
     void setIndexBuffer(VkBuffer buf) { mIndexBuffer = buf; }

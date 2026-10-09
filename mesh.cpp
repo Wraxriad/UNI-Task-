@@ -1,4 +1,5 @@
 #include "mesh.h"
+#include "delaunator.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -271,7 +272,7 @@ void Mesh::loadRawPoints(std::string fileName) {
     std::ifstream file(fullPath);
 
     if (!file.is_open()) {
-        Logger::getInstance().logText("Could not find the Laz Pints " + fileName, Logger::LogType::ERR);
+        Logger::getInstance().logText("Could not find the Laz Points " + fileName, Logger::LogType::ERR);
         return;
     }
 
@@ -282,17 +283,19 @@ void Mesh::loadRawPoints(std::string fileName) {
 
     bool firstPoint = true;
     glm::dvec3 offset(0.0);
-
     float scale = 0.001f; // resuse the size if the index's
+
+    std::vector<double> coords2D;
+    float minZ = 1e9f;
+    float maxZ = -1e9f;
 
     while (std::getline(file, line)) {
         if (line.empty()) continue;
 
         std::stringstream ss(line);
         double rawX, rawY, rawZ;
-        ss >> rawX >> rawY >> rawZ;
+        if (!(ss >> rawX >> rawY >> rawZ)) continue;
 
-        // Set it in the center
         if (firstPoint) {
             offset = glm::dvec3(rawX, rawY, rawZ);
             firstPoint = false;
@@ -302,15 +305,52 @@ void Mesh::loadRawPoints(std::string fileName) {
         v.position.x = static_cast<float>((rawX - offset.x) * scale);
         v.position.y = static_cast<float>((rawY - offset.y) * scale);
         v.position.z = static_cast<float>((rawZ - offset.z) * scale);
-
-        // Gives it a diffrent color
-        v.color = glm::vec3(1.0f, 1.0f, 1.0f);
         v.textureCoordinate = glm::vec2(0.0f);
+
+        if (v.position.z < minZ) minZ = v.position.z;
+        if (v.position.z > maxZ) maxZ = v.position.z;
 
         mVertices.push_back(v);
 
-        mIndices.push_back(static_cast<uint16_t>(mIndices.size()));
+        coords2D.push_back(v.position.x);
+        coords2D.push_back(v.position.y);
     }
     file.close();
-    Logger::getInstance().logText("Loaded " + std::to_string(mVertices.size()) + " points.", Logger::LogType::HIGHLIGHT);
+
+    float heightRange = (maxZ - minZ > 0.0001f) ? (maxZ - minZ) : 1.0f;
+    for (auto& v : mVertices) {
+        float t = (v.position.z - minZ) / heightRange; // 0.0 at lowest, 1.0 at highest
+
+        // 3-stop gradient: Lush Green (low) -> Rocky Brown (mid) -> Snow White (peak)
+        if (t < 0.5f) {
+            float subT = t / 0.5f;
+            v.color = glm::mix(glm::vec3(0.15f, 0.55f, 0.15f), glm::vec3(0.55f, 0.40f, 0.25f), subT);
+        } else {
+            float subT = (t - 0.5f) / 0.5f;
+            v.color = glm::mix(glm::vec3(0.55f, 0.40f, 0.25f), glm::vec3(0.95f, 0.95f, 1.0f), subT);
+        }
+    }
+
+    delaunator::Delaunator d(coords2D);
+
+    mIndices.clear();
+    float maxEdgeLength = 5.0f;
+    for (size_t i = 0; i < d.triangles.size(); i += 3) {
+        size_t i0 = d.triangles[i];
+        size_t i1 = d.triangles[i + 1];
+        size_t i2 = d.triangles[i + 2];
+
+        float d1 = glm::distance(mVertices[i0].position, mVertices[i1].position);
+        float d2 = glm::distance(mVertices[i1].position, mVertices[i2].position);
+        float d3 = glm::distance(mVertices[i2].position, mVertices[i0].position);
+
+        if (d1 > maxEdgeLength || d2 > maxEdgeLength || d3 > maxEdgeLength)
+            continue;
+
+        mIndices.push_back(static_cast<uint32_t>(i0));
+        mIndices.push_back(static_cast<uint32_t>(i1));
+        mIndices.push_back(static_cast<uint32_t>(i2));
+    }
+
+    Logger::getInstance().logText("Loaded " + std::to_string(mVertices.size()) + " points with elevation colors.", Logger::LogType::HIGHLIGHT);
 }

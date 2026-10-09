@@ -551,7 +551,7 @@ void Renderer::createGraphicsPipeline()
 
     VkPipelineInputAssemblyStateCreateInfo inputAssembly{};
     inputAssembly.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
-    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST; // VK_PRIMITIVE_TOPOLOGY_LINE_STRIP or VK_PRIMITIVE_TOPOLOGY_POINT_LIST.
+    inputAssembly.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST; // VK_PRIMITIVE_TOPOLOGY_LINE_STRIP or VK_PRIMITIVE_TOPOLOGY_POINT_LIST.
     inputAssembly.primitiveRestartEnable = VK_FALSE;
 
     VkPipelineViewportStateCreateInfo viewportState{};
@@ -565,7 +565,7 @@ void Renderer::createGraphicsPipeline()
     rasterizer.rasterizerDiscardEnable = VK_FALSE;
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL;
     rasterizer.lineWidth = 1.0f;
-    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT;
+    rasterizer.cullMode = VK_CULL_MODE_NONE;
     rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
     rasterizer.depthBiasEnable = VK_FALSE;
 
@@ -746,10 +746,10 @@ void Renderer::recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t image
         VkBuffer vertexBuffers[] = {mesh->getVertexBuffer()};
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
-        vkCmdBindIndexBuffer(commandBuffer, mesh->getIndexBuffer(), 0, VK_INDEX_TYPE_UINT16);
+        vkCmdBindIndexBuffer(commandBuffer, mesh->getIndexBuffer(), 0, VK_INDEX_TYPE_UINT32);
 
         // Bind texture descriptor set if available
-        if (material->textureIndex < mAllTextures.size()) {
+        if (material->hasTexture && material->textureIndex < mAllTextures.size()) {
             VkDescriptorSet textureSet = mAllTextures[material->textureIndex]->mTextureDescriptorSet;
             vkCmdBindDescriptorSets(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout,
                                     1, 1, &textureSet, 0, nullptr);
@@ -759,7 +759,8 @@ void Renderer::recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t image
         PushConstants push{};
         push.model = gameObject->getModelMatrix();
         push.objectColor = material->color;
-        push.specularParams = glm::vec4(1.0f, material->shininess, 0.0f, 0.0f);
+        push.specularParams = glm::vec4(1.0f, material->shininess, material->hasTexture ? 1.0f : 0.0f, 0.0f);
+
         vkCmdPushConstants(commandBuffer, pipelineLayout,
                            VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT,
                            0, sizeof(PushConstants), &push);
@@ -1213,7 +1214,8 @@ GameObject* Renderer::spawnObject(
 
     Material* material = new Material();
     material->pipeline = graphicsPipeline;
-    material->color = glm::vec4(0.8f, 0.8f, 0.8f, 1.0f);
+    material->color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    material->hasTexture = false; // change if has texture
 
     // IMPORTANT: Check if the mesh has materials from MTL file
     const auto& materials = mesh->getMaterials();
@@ -1330,7 +1332,7 @@ void Renderer::createMeshBuffers(Mesh* mesh)
     mesh->setVertexBufferMemory(vertexBufferMemory);
 
     // Create index buffer
-    VkDeviceSize indexBufferSize = sizeof(uint16_t) * mesh->getIndices().size();
+    VkDeviceSize indexBufferSize = sizeof(uint32_t) * mesh->getIndices().size();
 
     createBuffer(indexBufferSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT,
                  VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
@@ -1564,7 +1566,7 @@ void Renderer::updateUniformBuffer(uint32_t currentImage)
 
     // Projection matrix
     float aspect = swapChainExtent.width / (float)swapChainExtent.height;
-    ubo.proj = glm::perspective(glm::radians(45.0f), aspect, 0.1f, 100.0f);
+    ubo.proj = glm::perspective(glm::radians(45.0f), aspect, 0.2f, 2000.0f);
 
     // Vulkan clip space has inverted Y compared to OpenGL
     ubo.proj[1][1] *= -1;

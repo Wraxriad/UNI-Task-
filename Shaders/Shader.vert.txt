@@ -30,6 +30,7 @@ void main() {
     // --- POINT CLOUD SPECIFIC ---
     gl_PointSize = 4.0; // Makes the points visible!
     // ----------------------------
+
     fragPos = worldPos.xyz;
     fragColor = inColor;
     fragTexCoord = inTexCoord;
